@@ -1,36 +1,98 @@
 import { useState } from "react";
+import { sendMessage } from "../services/api";
 import "../styles/ChatInput.css";
 
-function ChatInput({ onSend }) {
-  const [text, setText] = useState("");
 
-  const handleSend = () => {
-    if (text.trim() === "") return;
+function ChatInput({ setMessages, setIsTyping }) {
 
-    onSend(text);
+    const [input, setInput] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    setText("");
-  };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSend();
-    }
-  };
+    const handleSend = async () => {
 
-  return (
-    <div className="chat-input">
-      <input
-        type="text"
-        placeholder="Ask Nexora AI anything..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
+        if (!input.trim() || loading) return;
 
-      <button onClick={handleSend}>Send</button>
-    </div>
-  );
+
+        const userMessage = input;
+
+
+        // Show user message immediately
+        setMessages(prev => [
+            ...prev,
+            {
+                sender: "user",
+                text: userMessage
+            }
+        ]);
+
+
+        setInput("");
+        setLoading(true);
+        setIsTyping(true);
+
+
+        try {
+
+            // Send message to FastAPI
+            const response = await sendMessage(userMessage);
+
+
+            // Show AI response
+            setMessages(prev => [
+                ...prev,
+                {
+                    sender: "bot",
+                    text: response
+                }
+            ]);
+
+        } 
+        catch(error) {
+
+            console.error("Error:", error);
+
+            setMessages(prev => [
+                ...prev,
+                {
+                    sender: "bot",
+                    text: "Sorry, something went wrong."
+                }
+            ]);
+
+        }
+
+
+        setIsTyping(false);
+        setLoading(false);
+    };
+
+
+    return (
+
+        <div className="chat-input">
+
+            <input
+                type="text"
+                placeholder="Ask Nexora AI anything..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                    if(e.key === "Enter"){
+                        handleSend();
+                    }
+                }}
+            />
+
+
+            <button onClick={handleSend}>
+                {loading ? "..." : "Send"}
+            </button>
+
+        </div>
+
+    );
 }
+
 
 export default ChatInput;
