@@ -1,0 +1,54 @@
+.sidebar {
+  width: 260px;
+  background: white;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.dark {
+  background: #111827;
+  color: white;
+  border-right: 1px solid #374151;
+}
+
+.new-chat {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.new-chat:hover {
+  background: #1d4ed8;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  flex: 1;
+}
+
+.sidebar li {
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sidebar li:hover {
+  background: rgba(37,99,235,0.1);
+}
+
+.bottom-menu {
+  margin-top: auto;
+}
+
+.bottom-menu p {
+  cursor: pointer;
+  margin-top: 15px;
+}

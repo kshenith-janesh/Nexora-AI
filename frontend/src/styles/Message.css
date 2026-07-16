@@ -1,0 +1,34 @@
+.message {
+  display: flex;
+  margin: 15px 0;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.ai {
+  justify-content: flex-start;
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.message.user .message-content {
+  background: #2563eb;
+  color: white;
+}
+
+.message.ai .message-content {
+  background: white;
+  color: black;
+}
+
+.message p {
+  margin-top: 8px;
+  line-height: 1.5;
+}

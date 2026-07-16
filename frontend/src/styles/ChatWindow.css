@@ -1,0 +1,38 @@
+.chat-window {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f7fb;
+  overflow-y: auto;
+}
+
+.messages {
+  width: 100%;
+  padding: 30px;
+}
+
+.welcome-box {
+  text-align: center;
+}
+
+.welcome-box h1 {
+  color: #2563eb;
+  margin-bottom: 15px;
+}
+
+.welcome-box p {
+  color: #666;
+}
+
+.typing {
+  margin: 20px;
+  color: #666;
+  font-style: italic;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
