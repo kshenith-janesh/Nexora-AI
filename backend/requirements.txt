@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 fastapi
 uvicorn
 groq
 python-dotenv
 requests
+=======
+fastapi
+uvicorn
+groq
+python-dotenv
+requests
+>>>>>>> 63befc9 (Use environment variable for backend URL)

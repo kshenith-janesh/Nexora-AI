@@ -1,26 +1,22 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
+export async function sendMessage(message) {
+  const response = await fetch(`${API_URL}/chat/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      message: message,
+    }),
+  });
 
-export async function sendMessage(message){
+  if (!response.ok) {
+    throw new Error("Failed to connect to server");
+  }
 
-    const response = await fetch(`${API_URL}/chat/`,{
+  const data = await response.json();
 
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-            message:message
-        })
-
-    });
-
-
-    const data = await response.json();
-
-
-    return data.response;
-
+  return data.response;
 }
